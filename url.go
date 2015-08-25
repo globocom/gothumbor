@@ -11,7 +11,7 @@ import (
 type ThumborOptions struct {
 	Width  int
 	Height int
-	Smart bool
+	Smart  bool
 }
 
 func GetThumborPath(key, imageUrl string, options ThumborOptions) (url string, err error) {
@@ -36,7 +36,7 @@ func GetUrlParts(imageUrl string, options ThumborOptions) (urlPartial string, er
 		parts = append(parts, fmt.Sprintf("%dx%d", options.Width, options.Height))
 	}
 
-	if options.Smart{
+	if options.Smart {
 		parts = append(parts, "smart")
 	}
 
