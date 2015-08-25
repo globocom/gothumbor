@@ -1,17 +1,17 @@
 package gothumbor
+
 import (
+	"crypto/hmac"
+	"crypto/sha1"
+	"encoding/base64"
 	"fmt"
 	"strings"
-	"crypto/hmac"
-	"encoding/base64"
-	"crypto/sha1"
 )
 
 type ThumborOptions struct {
 	Width  int
 	Height int
 }
-
 
 func GetThumborPath(key, imageUrl string, options ThumborOptions) (url string, err error) {
 	var partial string
@@ -26,7 +26,6 @@ func GetThumborPath(key, imageUrl string, options ThumborOptions) (url string, e
 	url = strings.Join([]string{url, partial}, "/")
 	return url, err
 }
-
 
 func GetUrlParts(imageUrl string, options ThumborOptions) (urlPartial string, err error) {
 	height := 0

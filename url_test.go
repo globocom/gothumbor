@@ -2,8 +2,8 @@ package gothumbor_test
 
 import (
 	"github.com/globocom/gothumbor"
-	"testing"
 	"strings"
+	"testing"
 )
 
 const MYKEY = "my-security-key"
@@ -12,8 +12,7 @@ const WIDTH = 300
 const HEIGHT = 200
 const ENCRYPTED_URL = "/8ammJH8D-7tXy6kU3lTvoXlhu4o=/300x200/my.server.com/some/path/to/image.jpg"
 
-
-func TestGetUrlPartialWithDefautWidthAndHeight(t *testing.T){
+func TestGetUrlPartialWithDefautWidthAndHeight(t *testing.T) {
 	thumborOptions := gothumbor.ThumborOptions{}
 	url, err := gothumbor.GetUrlParts(IMAGEURL, thumborOptions)
 	if err != nil {
@@ -24,7 +23,7 @@ func TestGetUrlPartialWithDefautWidthAndHeight(t *testing.T){
 	}
 }
 
-func TestGetUrlPartialOnlyWithWidthAndHeight(t *testing.T){
+func TestGetUrlPartialOnlyWithWidthAndHeight(t *testing.T) {
 	thumborOptions := gothumbor.ThumborOptions{Width: WIDTH, Height: HEIGHT}
 	url, err := gothumbor.GetUrlParts(IMAGEURL, thumborOptions)
 	if err != nil {
