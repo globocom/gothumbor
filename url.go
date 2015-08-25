@@ -12,6 +12,7 @@ import (
 type ThumborOptions struct {
 	Width  int
 	Height int
+	Smart  bool
 }
 
 var (
@@ -42,8 +43,14 @@ func GetUrlParts(imageUrl string, options ThumborOptions) (urlPartial string, er
 		return "", ErrorWidth
 	}
 
-	wXh := fmt.Sprintf("%dx%d", options.Width, options.Height)
-	urlPartial = strings.Join([]string{wXh, imageUrl}, "/")
+	var parts []string
+	parts = append(parts, fmt.Sprintf("%dx%d", options.Width, options.Height))
 
-	return urlPartial, nil
+	if options.Smart {
+		parts = append(parts, "smart")
+	}
+
+	parts = append(parts, imageUrl)
+	urlPartial = strings.Join(parts, "/")
+	return urlPartial, err
 }

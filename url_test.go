@@ -19,7 +19,18 @@ func TestGetUrlPartialWithDefautWidthAndHeight(t *testing.T) {
 	if err != nil {
 		t.Errorf("Got an error when tried to generate the thumbor url", err)
 	}
-	if url != strings.Join([]string{"0x0", IMAGEURL}, "/") {
+	if url != IMAGEURL {
+		t.Error("Got an unxpected partial url:", url)
+	}
+}
+
+func TestGetUrlPartialWithSmart(t *testing.T) {
+	thumborOptions := gothumbor.ThumborOptions{Smart: true}
+	url, err := gothumbor.GetUrlParts(IMAGEURL, thumborOptions)
+	if err != nil {
+		t.Errorf("Got an error when tried to generate the thumbor url", err)
+	}
+	if url != strings.Join([]string{"smart", IMAGEURL}, "/") {
 		t.Error("Got an unxpected partial url:", url)
 	}
 }
