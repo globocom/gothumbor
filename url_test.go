@@ -13,25 +13,29 @@ const WIDTH = 300
 const HEIGHT = 200
 const ENCRYPTED_URL = "8ammJH8D-7tXy6kU3lTvoXlhu4o=/300x200/my.server.com/some/path/to/image.jpg"
 
-func TestGetUrlPartialWithDefautWidthAndHeight(t *testing.T) {
-	thumborOptions := gothumbor.ThumborOptions{}
+func TestGetUrlPartialWithWidthAndHeight(t *testing.T) {
+	thumborOptions := gothumbor.ThumborOptions{Width: 1, Height: 1, Smart: false}
 	url, err := gothumbor.GetUrlParts(IMAGEURL, thumborOptions)
 	if err != nil {
-		t.Errorf("Got an error when tried to generate the thumbor url", err)
+		t.Error("Got an error when tried to generate the thumbor url", err)
 	}
-	if url != IMAGEURL {
-		t.Error("Got an unxpected partial url:", url)
+
+	urlE := strings.Join([]string{"1x1", IMAGEURL}, "/")
+	if url != urlE {
+		t.Errorf("Got an unxpected partial url: %s != %s", url, urlE)
 	}
 }
 
 func TestGetUrlPartialWithSmart(t *testing.T) {
-	thumborOptions := gothumbor.ThumborOptions{Smart: true}
+	thumborOptions := gothumbor.ThumborOptions{Width: 1, Height: 1, Smart: true}
 	url, err := gothumbor.GetUrlParts(IMAGEURL, thumborOptions)
 	if err != nil {
-		t.Errorf("Got an error when tried to generate the thumbor url", err)
+		t.Error("Got an error when tried to generate the thumbor url", err)
 	}
-	if url != strings.Join([]string{"smart", IMAGEURL}, "/") {
-		t.Error("Got an unxpected partial url:", url)
+
+	urlE := strings.Join([]string{"1x1", "smart", IMAGEURL}, "/")
+	if url != urlE {
+		t.Errorf("Got an unxpected partial url: %s != %s", url, urlE)
 	}
 }
 
@@ -39,7 +43,7 @@ func TestGetUrlPartialOnlyWithWidthAndHeight(t *testing.T) {
 	thumborOptions := gothumbor.ThumborOptions{Width: WIDTH, Height: HEIGHT}
 	url, err := gothumbor.GetUrlParts(IMAGEURL, thumborOptions)
 	if err != nil {
-		t.Errorf("Got an error when tried to generate the thumbor url", err)
+		t.Error("Got an error when tried to generate the thumbor url", err)
 	}
 	if url != strings.Join([]string{"300x200", IMAGEURL}, "/") {
 		t.Error("Got an unxpected partial path:", url)
@@ -50,11 +54,12 @@ func TestGetUrlUnderSpec1(t *testing.T) {
 	//For spec 1: https://github.com/thumbor/thumbor/wiki/Libraries
 
 	thumborOptions := gothumbor.ThumborOptions{Width: WIDTH, Height: HEIGHT}
-
 	newUrl, err := gothumbor.GetThumborPath(MYKEY, IMAGEURL, thumborOptions)
+
 	if err != nil {
-		t.Errorf("Got an error when tried to generate the thumbor url", err)
+		t.Errorf("Got an error when tried to generate the thumbor url:%s", err)
 	}
+
 	if newUrl != ENCRYPTED_URL {
 		t.Error("Got an unxpected thumbor path:", newUrl)
 	}
@@ -62,6 +67,7 @@ func TestGetUrlUnderSpec1(t *testing.T) {
 
 func TestNegativeHeight(t *testing.T) {
 	thumborOptions := gothumbor.ThumborOptions{
+		Width:  1,
 		Height: -1,
 	}
 	url, err := gothumbor.GetUrlParts(IMAGEURL, thumborOptions)
@@ -76,7 +82,8 @@ func TestNegativeHeight(t *testing.T) {
 
 func TestNegativeWidth(t *testing.T) {
 	thumborOptions := gothumbor.ThumborOptions{
-		Width: -1,
+		Width:  -1,
+		Height: 1,
 	}
 	url, err := gothumbor.GetUrlParts(IMAGEURL, thumborOptions)
 	if err == nil || url != "" {

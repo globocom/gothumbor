@@ -35,11 +35,11 @@ func GetThumborPath(key, imageUrl string, options ThumborOptions) (url string, e
 }
 
 func GetUrlParts(imageUrl string, options ThumborOptions) (urlPartial string, err error) {
-	if options.Height < 0 {
+	if options.Height <= 0 {
 		return "", ErrorHeight
 	}
 
-	if options.Width < 0 {
+	if options.Width <= 0 {
 		return "", ErrorWidth
 	}
 
