@@ -1,9 +1,10 @@
 package gothumbor_test
 
 import (
-	"github.com/globocom/gothumbor"
 	"strings"
 	"testing"
+
+	"github.com/globocom/gothumbor"
 )
 
 const MYKEY = "my-security-key"
@@ -45,5 +46,33 @@ func TestGetUrlUnderSpec1(t *testing.T) {
 	}
 	if newUrl != ENCRYPTED_URL {
 		t.Error("Got an unxpected thumbor path:", newUrl)
+	}
+}
+
+func TestNegativeHeight(t *testing.T) {
+	thumborOptions := gothumbor.ThumborOptions{
+		Height: -1,
+	}
+	url, err := gothumbor.GetUrlParts(IMAGEURL, thumborOptions)
+	if err == nil || url != "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+
+	if err.Error() != gothumbor.ErrorHeight.Error() {
+		t.Errorf("Got an unxpected error height")
+	}
+}
+
+func TestNegativeWidth(t *testing.T) {
+	thumborOptions := gothumbor.ThumborOptions{
+		Width: -1,
+	}
+	url, err := gothumbor.GetUrlParts(IMAGEURL, thumborOptions)
+	if err == nil || url != "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+
+	if err.Error() != gothumbor.ErrorWidth.Error() {
+		t.Errorf("Got an unxpected error width")
 	}
 }
