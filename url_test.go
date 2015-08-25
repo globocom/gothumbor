@@ -10,7 +10,7 @@ const MYKEY = "my-security-key"
 const IMAGEURL = "my.server.com/some/path/to/image.jpg"
 const WIDTH = 300
 const HEIGHT = 200
-const ENCRYPTED_URL = "/8ammJH8D-7tXy6kU3lTvoXlhu4o=/300x200/my.server.com/some/path/to/image.jpg"
+const ENCRYPTED_URL = "8ammJH8D-7tXy6kU3lTvoXlhu4o=/300x200/my.server.com/some/path/to/image.jpg"
 
 func TestGetUrlPartialWithDefautWidthAndHeight(t *testing.T) {
 	thumborOptions := gothumbor.ThumborOptions{}
@@ -30,7 +30,7 @@ func TestGetUrlPartialOnlyWithWidthAndHeight(t *testing.T) {
 		t.Errorf("Got an error when tried to generate the thumbor url", err)
 	}
 	if url != strings.Join([]string{"300x200", IMAGEURL}, "/") {
-		t.Error("Got an unxpected partial url:", url)
+		t.Error("Got an unxpected partial path:", url)
 	}
 }
 
@@ -44,6 +44,6 @@ func TestGetUrlUnderSpec1(t *testing.T) {
 		t.Errorf("Got an error when tried to generate the thumbor url", err)
 	}
 	if newUrl != ENCRYPTED_URL {
-		t.Error("Got an unxpected thumbor url:", newUrl)
+		t.Error("Got an unxpected thumbor path:", newUrl)
 	}
 }
