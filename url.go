@@ -14,9 +14,9 @@ type ThumborOptions struct {
 	Smart  bool
 }
 
-func GetThumborPath(key, imageUrl string, options ThumborOptions) (url string, err error) {
+func GetThumborPath(key, imageURL string, options ThumborOptions) (url string, err error) {
 	var partial string
-	if partial, err = GetUrlParts(imageUrl, options); err != nil {
+	if partial, err = GetUrlParts(imageURL, options); err != nil {
 		return
 	}
 
