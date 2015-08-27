@@ -65,9 +65,9 @@ func TestFitInParameter(t *testing.T) {
 func TestOneFilterParameter(t *testing.T) {
 	filter := "max-age(360000)"
 	filters := []string{filter}
-	thumborOptions := gothumbor.ThumborOptions{Width: 200, Height: 300, Filters: filters}
+	thumborOptions := ThumborOptions{Width: 200, Height: 300, Filters: filters}
 
-	url, err := gothumbor.GetURLParts(IMAGEURL, thumborOptions)
+	url, err := getURLParts(IMAGEURL, thumborOptions)
 	if err != nil || url == "" {
 		t.Errorf("Got an error when tried to generate the thumbor url")
 	}
@@ -82,9 +82,9 @@ func TestTwoFiltersParameter(t *testing.T) {
 	firstFilter := "max-age(360000)"
 	secondFilter := "grayscale()"
 	filters := []string{firstFilter, secondFilter}
-	thumborOptions := gothumbor.ThumborOptions{Width: 200, Height: 300, Filters: filters}
+	thumborOptions := ThumborOptions{Width: 200, Height: 300, Filters: filters}
 
-	url, err := gothumbor.GetURLParts(IMAGEURL, thumborOptions)
+	url, err := getURLParts(IMAGEURL, thumborOptions)
 	if err != nil || url == "" {
 		t.Errorf("Got an error when tried to generate the thumbor url")
 	}
