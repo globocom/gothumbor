@@ -61,3 +61,40 @@ func TestFitInParameter(t *testing.T) {
 	}
 
 }
+
+func TestOneFilterParameter(t *testing.T) {
+	filter := "max-age(360000)"
+	filters := []string{filter}
+	thumborOptions := gothumbor.ThumborOptions{Width: 200, Height: 300, Filters: filters}
+
+	url, err := gothumbor.GetURLParts(IMAGEURL, thumborOptions)
+	if err != nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+
+	if !strings.Contains(url, "filters:"+filter) {
+		t.Errorf("url doesn't have a filters parameter")
+	}
+
+}
+
+func TestTwoFiltersParameter(t *testing.T) {
+	firstFilter := "max-age(360000)"
+	secondFilter := "grayscale()"
+	filters := []string{firstFilter, secondFilter}
+	thumborOptions := gothumbor.ThumborOptions{Width: 200, Height: 300, Filters: filters}
+
+	url, err := gothumbor.GetURLParts(IMAGEURL, thumborOptions)
+	if err != nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+
+	if !strings.Contains(url, "filters:"+firstFilter) {
+		t.Errorf("url doesn't have a first filter parameter")
+	}
+
+	if !strings.Contains(url, "filters:"+secondFilter) {
+		t.Errorf("url doesn't have a second filter parameter")
+	}
+
+}
