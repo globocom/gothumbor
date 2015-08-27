@@ -5,20 +5,20 @@ import (
 	"testing"
 )
 
-const IMAGEURL = "my.server.com/some/path/to/image.jpg"
-const WIDTH = 300
-const HEIGHT = 200
-const ENCRYPTEDURL = "8ammJH8D-7tXy6kU3lTvoXlhu4o=/300x200/my.server.com/some/path/to/image.jpg"
-const UNSAFEURL = "/300x200/my.server.com/some/path/to/image.jpg"
+const imageURL = "my.server.com/some/path/to/image.jpg"
+const width = 300
+const height = 200
+const encryptedURL = "8ammJH8D-7tXy6kU3lTvoXlhu4o=/300x200/my.server.com/some/path/to/image.jpg"
+const unsafeURL = "/300x200/my.server.com/some/path/to/image.jpg"
 
 func TestGetUrlPartialWithWidthAndHeight(t *testing.T) {
 	thumborOptions := ThumborOptions{Width: 1, Height: 1, Smart: false}
-	url, err := getURLParts(IMAGEURL, thumborOptions)
+	url, err := getURLParts(imageURL, thumborOptions)
 	if err != nil {
 		t.Error("Got an error when tried to generate the thumbor url", err)
 	}
 
-	urlE := strings.Join([]string{"1x1", IMAGEURL}, "/")
+	urlE := strings.Join([]string{"1x1", imageURL}, "/")
 	if url != urlE {
 		t.Errorf("Got an unxpected partial url: %s != %s", url, urlE)
 	}
@@ -26,24 +26,24 @@ func TestGetUrlPartialWithWidthAndHeight(t *testing.T) {
 
 func TestGetUrlPartialWithSmart(t *testing.T) {
 	thumborOptions := ThumborOptions{Width: 1, Height: 1, Smart: true}
-	url, err := getURLParts(IMAGEURL, thumborOptions)
+	url, err := getURLParts(imageURL, thumborOptions)
 	if err != nil {
 		t.Error("Got an error when tried to generate the thumbor url", err)
 	}
 
-	urlE := strings.Join([]string{"1x1", "smart", IMAGEURL}, "/")
+	urlE := strings.Join([]string{"1x1", "smart", imageURL}, "/")
 	if url != urlE {
 		t.Errorf("Got an unxpected partial url: %s != %s", url, urlE)
 	}
 }
 
 func TestGetUrlPartialOnlyWithWidthAndHeight(t *testing.T) {
-	thumborOptions := ThumborOptions{Width: WIDTH, Height: HEIGHT}
-	url, err := getURLParts(IMAGEURL, thumborOptions)
+	thumborOptions := ThumborOptions{Width: width, Height: height}
+	url, err := getURLParts(imageURL, thumborOptions)
 	if err != nil {
 		t.Error("Got an error when tried to generate the thumbor url", err)
 	}
-	if url != strings.Join([]string{"300x200", IMAGEURL}, "/") {
+	if url != strings.Join([]string{"300x200", imageURL}, "/") {
 		t.Error("Got an unxpected partial path:", url)
 	}
 }
@@ -61,7 +61,7 @@ func TestEscapeURLByRFC3986(t *testing.T) {
 func TestFitInParameter(t *testing.T) {
 	thumborOptions := ThumborOptions{FitIn: true}
 
-	url, err := getURLParts(IMAGEURL, thumborOptions)
+	url, err := getURLParts(imageURL, thumborOptions)
 	if err != nil || url == "" {
 		t.Errorf("Got an error when tried to generate the thumbor url")
 	}
@@ -77,7 +77,7 @@ func TestOneFilterParameter(t *testing.T) {
 	filters := []string{filter}
 	thumborOptions := ThumborOptions{Width: 200, Height: 300, Filters: filters}
 
-	url, err := getURLParts(IMAGEURL, thumborOptions)
+	url, err := getURLParts(imageURL, thumborOptions)
 	if err != nil || url == "" {
 		t.Errorf("Got an error when tried to generate the thumbor url")
 	}
@@ -94,7 +94,7 @@ func TestTwoFiltersParameter(t *testing.T) {
 	filters := []string{firstFilter, secondFilter}
 	thumborOptions := ThumborOptions{Width: 200, Height: 300, Filters: filters}
 
-	url, err := getURLParts(IMAGEURL, thumborOptions)
+	url, err := getURLParts(imageURL, thumborOptions)
 	if err != nil || url == "" {
 		t.Errorf("Got an error when tried to generate the thumbor url")
 	}
