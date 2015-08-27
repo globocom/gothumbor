@@ -103,3 +103,55 @@ func TestTwoFiltersParameter(t *testing.T) {
 		t.Errorf("url doesn't have a first filter parameter")
 	}
 }
+
+
+func TestFlipWithoutAnyOtherParameter(t *testing.T) {
+	thumborOptions := ThumborOptions{Flip: true}
+	url, err := getURLParts(imageURL, thumborOptions)
+	if err != nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+
+	if url != strings.Join([]string{"-0x0", imageURL}, "/") {
+		t.Errorf("url is not fliped", url)
+	}
+}
+
+
+func TestFlopWithoutAnyOtherParameter(t *testing.T) {
+	thumborOptions := ThumborOptions{Flop: true}
+	url, err := getURLParts(imageURL, thumborOptions)
+	if err != nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+
+	if url != strings.Join([]string{"0x-0", imageURL}, "/") {
+		t.Errorf("url is not floped", url)
+	}
+}
+
+
+func TestFlipFlopWithoutAnyOtherParameter(t *testing.T) {
+	thumborOptions := ThumborOptions{Flop: true, Flip: true}
+	url, err := getURLParts(imageURL, thumborOptions)
+	if err != nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+
+	if url != strings.Join([]string{"-0x-0", imageURL}, "/") {
+		t.Errorf("url is not flipfloped", url)
+	}
+}
+
+
+func TestFlipFlopWithWidthAndHeigh(t *testing.T) {
+	thumborOptions := ThumborOptions{Flop: true, Flip: true, Height: 500, Width: 400}
+	url, err := getURLParts(imageURL, thumborOptions)
+	if err != nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+
+	if url != strings.Join([]string{"-400x-500", imageURL}, "/") {
+		t.Errorf("url is not flipfloped", url)
+	}
+}

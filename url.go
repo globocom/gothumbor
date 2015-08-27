@@ -15,6 +15,8 @@ type ThumborOptions struct {
 	Smart   bool
 	FitIn   bool
 	Filters []string
+	Flip    bool
+	Flop    bool
 }
 
 func GetCryptedThumborPath(key, imageURL string, options ThumborOptions) (url string, err error) {
@@ -47,8 +49,17 @@ func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, er
 	}
 	imageURL = partialObject.EscapedPath()
 
-	if options.Height != 0 || options.Width != 0 {
-		parts = append(parts, fmt.Sprintf("%dx%d", options.Width, options.Height))
+	if options.Height != 0 || options.Width != 0 || options.Flip || options.Flop {
+		flip := ""
+		flop := ""
+
+		if options.Flip{
+			flip = "-"
+		}
+		if options.Flop{
+			flop = "-"
+		}
+		parts = append(parts, fmt.Sprintf("%s%dx%s%d", flip, options.Width, flop, options.Height))
 	}
 
 	if options.Smart {
