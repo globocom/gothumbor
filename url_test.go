@@ -48,4 +48,13 @@ func TestGetUrlPartialOnlyWithWidthAndHeight(t *testing.T) {
 	}
 }
 
-
+func TestEscapeURLByRFC3986(t *testing.T) {
+	thumborOptions := ThumborOptions{}
+	url, err := getURLParts("/a-path with spaces.jpg", thumborOptions)
+	if err != nil {
+		t.Error("Got an error when tried to process a path with spaces", err)
+	}
+	if url != "/a-path%20with%20spaces.jpg" {
+		t.Error("Got an unxpected partial path:", url)
+	}
+}
