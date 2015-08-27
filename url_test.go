@@ -1,21 +1,19 @@
-package gothumbor_test
+package gothumbor
 
 import (
 	"strings"
 	"testing"
-
-	"github.com/globocom/gothumbor"
 )
 
-const MYKEY = "my-security-key"
 const IMAGEURL = "my.server.com/some/path/to/image.jpg"
 const WIDTH = 300
 const HEIGHT = 200
 const ENCRYPTEDURL = "8ammJH8D-7tXy6kU3lTvoXlhu4o=/300x200/my.server.com/some/path/to/image.jpg"
+const UNSAFEURL = "/300x200/my.server.com/some/path/to/image.jpg"
 
 func TestGetUrlPartialWithWidthAndHeight(t *testing.T) {
-	thumborOptions := gothumbor.ThumborOptions{Width: 1, Height: 1, Smart: false}
-	url, err := gothumbor.GetURLParts(IMAGEURL, thumborOptions)
+	thumborOptions := ThumborOptions{Width: 1, Height: 1, Smart: false}
+	url, err := getURLParts(IMAGEURL, thumborOptions)
 	if err != nil {
 		t.Error("Got an error when tried to generate the thumbor url", err)
 	}
@@ -27,8 +25,8 @@ func TestGetUrlPartialWithWidthAndHeight(t *testing.T) {
 }
 
 func TestGetUrlPartialWithSmart(t *testing.T) {
-	thumborOptions := gothumbor.ThumborOptions{Width: 1, Height: 1, Smart: true}
-	url, err := gothumbor.GetURLParts(IMAGEURL, thumborOptions)
+	thumborOptions := ThumborOptions{Width: 1, Height: 1, Smart: true}
+	url, err := getURLParts(IMAGEURL, thumborOptions)
 	if err != nil {
 		t.Error("Got an error when tried to generate the thumbor url", err)
 	}
@@ -40,8 +38,8 @@ func TestGetUrlPartialWithSmart(t *testing.T) {
 }
 
 func TestGetUrlPartialOnlyWithWidthAndHeight(t *testing.T) {
-	thumborOptions := gothumbor.ThumborOptions{Width: WIDTH, Height: HEIGHT}
-	url, err := gothumbor.GetURLParts(IMAGEURL, thumborOptions)
+	thumborOptions := ThumborOptions{Width: WIDTH, Height: HEIGHT}
+	url, err := getURLParts(IMAGEURL, thumborOptions)
 	if err != nil {
 		t.Error("Got an error when tried to generate the thumbor url", err)
 	}
@@ -50,17 +48,4 @@ func TestGetUrlPartialOnlyWithWidthAndHeight(t *testing.T) {
 	}
 }
 
-func TestGetUrlUnderSpec1(t *testing.T) {
-	//For spec 1: https://github.com/thumbor/thumbor/wiki/Libraries
 
-	thumborOptions := gothumbor.ThumborOptions{Width: WIDTH, Height: HEIGHT}
-	newURL, err := gothumbor.GetThumborPath(MYKEY, IMAGEURL, thumborOptions)
-
-	if err != nil {
-		t.Errorf("Got an error when tried to generate the thumbor url:%s", err)
-	}
-
-	if newURL != ENCRYPTEDURL {
-		t.Error("Got an unxpected thumbor path:", newURL)
-	}
-}
