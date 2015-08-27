@@ -34,7 +34,7 @@ func GetThumborPath(key, imageURL string, options ThumborOptions) (url string, e
 	return url, err
 }
 
-func GetURLParts(imageUrl string, options ThumborOptions) (urlPartial string, err error) {
+func GetURLParts(imageURL string, options ThumborOptions) (urlPartial string, err error) {
 	if options.Height <= 0 {
 		return "", ErrorHeight
 	}
@@ -50,7 +50,7 @@ func GetURLParts(imageUrl string, options ThumborOptions) (urlPartial string, er
 		parts = append(parts, "smart")
 	}
 
-	parts = append(parts, imageUrl)
+	parts = append(parts, imageURL)
 	urlPartial = strings.Join(parts, "/")
 	return urlPartial, err
 }
