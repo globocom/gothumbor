@@ -99,12 +99,7 @@ func TestTwoFiltersParameter(t *testing.T) {
 		t.Errorf("Got an error when tried to generate the thumbor url")
 	}
 
-	if !strings.Contains(url, "filters:"+firstFilter) {
+	if !strings.Contains(url, "filters:"+firstFilter+":"+secondFilter) {
 		t.Errorf("url doesn't have a first filter parameter")
 	}
-
-	if !strings.Contains(url, "filters:"+secondFilter) {
-		t.Errorf("url doesn't have a second filter parameter")
-	}
-
 }

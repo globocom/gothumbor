@@ -59,8 +59,14 @@ func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, er
 		parts = append(parts, "fit-in")
 	}
 
+	filters := []string{}
 	for _, value := range options.Filters {
-		parts = append(parts, "filters:"+value)
+		filters = append(filters, value)
+	}
+
+	if len(options.Filters) > 0 {
+		filtersValue := strings.Join(filters, ":")
+		parts = append(parts, "filters:"+filtersValue)
 	}
 
 	parts = append(parts, imageURL)
