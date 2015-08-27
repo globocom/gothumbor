@@ -67,14 +67,6 @@ func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, er
 		parts = append(parts, fmt.Sprintf("%s%dx%s%d", flip, options.Width, flop, options.Height))
 	}
 
-	if options.Smart {
-		parts = append(parts, "smart")
-	}
-
-	if options.FitIn {
-		parts = append(parts, "fit-in")
-	}
-
 	filters := []string{}
 	for _, value := range options.Filters {
 		filters = append(filters, value)
@@ -83,6 +75,14 @@ func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, er
 	if len(options.Filters) > 0 {
 		filtersValue := strings.Join(filters, ":")
 		parts = append(parts, "filters:"+filtersValue)
+	}
+
+	if options.Smart {
+		parts = append(parts, "smart")
+	}
+
+	if options.FitIn {
+		parts = append(parts, "fit-in")
 	}
 
 	parts = append(parts, imageURL)
