@@ -94,3 +94,17 @@ func TestNegativeWidth(t *testing.T) {
 		t.Errorf("Got an unxpected error width")
 	}
 }
+
+func TestFitInParameter(t *testing.T) {
+	thumborOptions := gothumbor.ThumborOptions{FitIn: true}
+
+	url, err := gothumbor.GetURLParts(IMAGEURL, thumborOptions)
+	if err == nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+
+	if !strings.Contains(url, "fit-in") {
+		t.Errorf("url doesn't have a fit-in parameter")
+	}
+
+}
