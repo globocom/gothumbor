@@ -34,7 +34,7 @@ func GetThumborPath(imageURL string, options ThumborOptions) (path string, err e
 	if path, err = getURLParts(imageURL, options); err != nil {
 		return
 	}
-	return path, err
+	return
 }
 
 func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, err error) {
