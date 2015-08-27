@@ -52,7 +52,7 @@ func TestFitInParameter(t *testing.T) {
 	thumborOptions := ThumborOptions{FitIn: true}
 
 	url, err := getURLParts(IMAGEURL, thumborOptions)
-	if err == nil || url == "" {
+	if err != nil || url == "" {
 		t.Errorf("Got an error when tried to generate the thumbor url")
 	}
 
