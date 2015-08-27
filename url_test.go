@@ -64,33 +64,3 @@ func TestGetUrlUnderSpec1(t *testing.T) {
 		t.Error("Got an unxpected thumbor path:", newURL)
 	}
 }
-
-func TestNegativeHeight(t *testing.T) {
-	thumborOptions := gothumbor.ThumborOptions{
-		Width:  1,
-		Height: -1,
-	}
-	url, err := gothumbor.GetURLParts(IMAGEURL, thumborOptions)
-	if err == nil || url != "" {
-		t.Errorf("Got an error when tried to generate the thumbor url")
-	}
-
-	if err.Error() != gothumbor.ErrorHeight.Error() {
-		t.Errorf("Got an unxpected error height")
-	}
-}
-
-func TestNegativeWidth(t *testing.T) {
-	thumborOptions := gothumbor.ThumborOptions{
-		Width:  -1,
-		Height: 1,
-	}
-	url, err := gothumbor.GetURLParts(IMAGEURL, thumborOptions)
-	if err == nil || url != "" {
-		t.Errorf("Got an error when tried to generate the thumbor url")
-	}
-
-	if err.Error() != gothumbor.ErrorWidth.Error() {
-		t.Errorf("Got an unxpected error width")
-	}
-}
