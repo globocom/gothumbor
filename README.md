@@ -13,4 +13,4 @@ MIT (see LICENSE file).
 Contributors
 ------------
 
-[Rômulo Jales][https://github.com/romulojales]
+[Rômulo Jales](https://github.com/romulojales)
