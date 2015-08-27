@@ -58,3 +58,53 @@ func TestEscapeURLByRFC3986(t *testing.T) {
 		t.Error("Got an unxpected partial path:", url)
 	}
 }
+func TestFitInParameter(t *testing.T) {
+	thumborOptions := ThumborOptions{FitIn: true}
+
+	url, err := getURLParts(IMAGEURL, thumborOptions)
+	if err != nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+
+	if !strings.Contains(url, "fit-in") {
+		t.Errorf("url doesn't have a fit-in parameter")
+	}
+
+}
+
+func TestOneFilterParameter(t *testing.T) {
+	filter := "max-age(360000)"
+	filters := []string{filter}
+	thumborOptions := ThumborOptions{Width: 200, Height: 300, Filters: filters}
+
+	url, err := getURLParts(IMAGEURL, thumborOptions)
+	if err != nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+
+	if !strings.Contains(url, "filters:"+filter) {
+		t.Errorf("url doesn't have a filters parameter")
+	}
+
+}
+
+func TestTwoFiltersParameter(t *testing.T) {
+	firstFilter := "max-age(360000)"
+	secondFilter := "grayscale()"
+	filters := []string{firstFilter, secondFilter}
+	thumborOptions := ThumborOptions{Width: 200, Height: 300, Filters: filters}
+
+	url, err := getURLParts(IMAGEURL, thumborOptions)
+	if err != nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+
+	if !strings.Contains(url, "filters:"+firstFilter) {
+		t.Errorf("url doesn't have a first filter parameter")
+	}
+
+	if !strings.Contains(url, "filters:"+secondFilter) {
+		t.Errorf("url doesn't have a second filter parameter")
+	}
+
+}
