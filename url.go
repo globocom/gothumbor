@@ -22,7 +22,7 @@ var (
 
 func GetThumborPath(key, imageURL string, options ThumborOptions) (url string, err error) {
 	var partial string
-	if partial, err = GetUrlParts(imageURL, options); err != nil {
+	if partial, err = GetURLParts(imageURL, options); err != nil {
 		return
 	}
 
@@ -34,7 +34,7 @@ func GetThumborPath(key, imageURL string, options ThumborOptions) (url string, e
 	return url, err
 }
 
-func GetUrlParts(imageUrl string, options ThumborOptions) (urlPartial string, err error) {
+func GetURLParts(imageUrl string, options ThumborOptions) (urlPartial string, err error) {
 	if options.Height <= 0 {
 		return "", ErrorHeight
 	}
