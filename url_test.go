@@ -155,3 +155,40 @@ func TestFlipFlopWithWidthAndHeigh(t *testing.T) {
 		t.Errorf("url is not flipfloped", url)
 	}
 }
+
+
+func TestFiltersAndSmartCombinatiotn(t *testing.T) {
+	firstFilter := "max-age(360000)"
+	secondFilter := "grayscale()"
+	filters := []string{firstFilter, secondFilter}
+	thumborOptions := ThumborOptions{Smart: true, Width: 200, Height: 300, Filters: filters}
+
+	url, err := getURLParts(imageURL, thumborOptions)
+	if err != nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+
+	filtersPosition := strings.Index(url, "filters:"+firstFilter+":"+secondFilter)
+	smartPosition := strings.Index(url, "smart")
+	if filtersPosition > smartPosition {
+		t.Errorf("Filters parameter should be before smart option")
+	}
+}
+
+func TestFiltersAndFitInCombinatiotn(t *testing.T) {
+	firstFilter := "max-age(360000)"
+	secondFilter := "grayscale()"
+	filters := []string{firstFilter, secondFilter}
+	thumborOptions := ThumborOptions{FitIn: true, Width: 200, Height: 300, Filters: filters}
+
+	url, err := getURLParts(imageURL, thumborOptions)
+	if err != nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+
+	filtersPosition := strings.Index(url, "filters:"+firstFilter+":"+secondFilter)
+	fitInPosition := strings.Index(url, "fit-in")
+	if filtersPosition > fitInPosition {
+		t.Errorf("Filters parameter should be before fit-in option")
+	}
+}
