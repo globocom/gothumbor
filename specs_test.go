@@ -1,7 +1,8 @@
 package gothumbor_test
+
 import (
-	"testing"
 	"github.com/globocom/gothumbor"
+	"testing"
 )
 
 const MYKEY = "my-security-key"
@@ -10,7 +11,6 @@ const HEIGHT = 200
 const ENCRYPTEDURL = "8ammJH8D-7tXy6kU3lTvoXlhu4o=/300x200/my.server.com/some/path/to/image.jpg"
 const UNSAFEURL = "/300x200/my.server.com/some/path/to/image.jpg"
 const IMAGEURL = "my.server.com/some/path/to/image.jpg"
-
 
 func TestGetUrlUnderSpec1(t *testing.T) {
 	//For spec 1: https://github.com/thumbor/thumbor/wiki/Libraries
