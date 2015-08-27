@@ -4,6 +4,7 @@ import (
 	"crypto/hmac"
 	"crypto/sha1"
 	"encoding/base64"
+	"errors"
 	"fmt"
 	"strings"
 )
@@ -13,6 +14,11 @@ type ThumborOptions struct {
 	Height int
 	Smart  bool
 }
+
+var (
+	ErrorHeight = errors.New("Negative value height")
+	ErrorWidth  = errors.New("Negative value width")
+)
 
 func GetThumborPath(key, imageURL string, options ThumborOptions) (url string, err error) {
 	var partial string
@@ -29,12 +35,16 @@ func GetThumborPath(key, imageURL string, options ThumborOptions) (url string, e
 }
 
 func GetUrlParts(imageUrl string, options ThumborOptions) (urlPartial string, err error) {
+	if options.Height <= 0 {
+		return "", ErrorHeight
+	}
+
+	if options.Width <= 0 {
+		return "", ErrorWidth
+	}
 
 	var parts []string
-
-	if options.Height != 0 || options.Width != 0 {
-		parts = append(parts, fmt.Sprintf("%dx%d", options.Width, options.Height))
-	}
+	parts = append(parts, fmt.Sprintf("%dx%d", options.Width, options.Height))
 
 	if options.Smart {
 		parts = append(parts, "smart")
