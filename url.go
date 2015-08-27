@@ -5,6 +5,7 @@ import (
 	"crypto/sha1"
 	"encoding/base64"
 	"fmt"
+	"net/url"
 	"strings"
 )
 
@@ -14,9 +15,9 @@ type ThumborOptions struct {
 	Smart  bool
 }
 
-func GetCryptedThumborPath(key, imageURL string, options ThumborOptions) (url string, err error){
+func GetCryptedThumborPath(key, imageURL string, options ThumborOptions) (url string, err error) {
 	var partial string
-	if partial, err = GetThumborPath(imageURL, options); err != nil{
+	if partial, err = GetThumborPath(imageURL, options); err != nil {
 		return
 	}
 	hash := hmac.New(sha1.New, []byte(key))
@@ -37,7 +38,16 @@ func GetThumborPath(imageURL string, options ThumborOptions) (path string, err e
 func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, err error) {
 
 	var parts []string
-	parts = append(parts, fmt.Sprintf("%dx%d", options.Width, options.Height))
+
+	partialObject, err := url.Parse(imageURL)
+	if err != nil {
+		return "", err
+	}
+	imageURL = partialObject.EscapedPath()
+
+	if options.Height != 0 || options.Width != 0 {
+		parts = append(parts, fmt.Sprintf("%dx%d", options.Width, options.Height))
+	}
 
 	if options.Smart {
 		parts = append(parts, "smart")
@@ -45,5 +55,6 @@ func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, er
 
 	parts = append(parts, imageURL)
 	urlPartial = strings.Join(parts, "/")
-	return urlPartial, err
+
+	return
 }
