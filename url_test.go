@@ -5,7 +5,8 @@ import (
 	"testing"
 )
 
-const imageURL = "my.server.com/some/path/to/image.jpg"
+const baseImageURL = "my.server.com/some/path/to/image.jpg"
+const imageURL = "http://" + baseImageURL
 const width = 300
 const height = 200
 const encryptedURL = "8ammJH8D-7tXy6kU3lTvoXlhu4o=/300x200/my.server.com/some/path/to/image.jpg"
@@ -21,6 +22,17 @@ func TestGetUrlPartialWithWidthAndHeight(t *testing.T) {
 	urlE := strings.Join([]string{"1x1", imageURL}, "/")
 	if url != urlE {
 		t.Errorf("Got an unxpected partial url: %s != %s", url, urlE)
+	}
+}
+
+func TestGetUrlPartsShouldMaintainURL(t *testing.T) {
+	thumborOptions := ThumborOptions{Width: 1, Height: 1}
+	url, err := getURLParts(imageURL, thumborOptions)
+	if err != nil {
+		t.Error("Got an error when tried to generate the thumbor url", err)
+	}
+	if !strings.HasSuffix(url, imageURL) {
+		t.Errorf("Got an unxpected partial url: %s != %s", url, imageURL)
 	}
 }
 
@@ -104,7 +116,6 @@ func TestTwoFiltersParameter(t *testing.T) {
 	}
 }
 
-
 func TestFlipWithoutAnyOtherParameter(t *testing.T) {
 	thumborOptions := ThumborOptions{Flip: true}
 	url, err := getURLParts(imageURL, thumborOptions)
@@ -116,7 +127,6 @@ func TestFlipWithoutAnyOtherParameter(t *testing.T) {
 		t.Errorf("url is not fliped", url)
 	}
 }
-
 
 func TestFlopWithoutAnyOtherParameter(t *testing.T) {
 	thumborOptions := ThumborOptions{Flop: true}
@@ -130,7 +140,6 @@ func TestFlopWithoutAnyOtherParameter(t *testing.T) {
 	}
 }
 
-
 func TestFlipFlopWithoutAnyOtherParameter(t *testing.T) {
 	thumborOptions := ThumborOptions{Flop: true, Flip: true}
 	url, err := getURLParts(imageURL, thumborOptions)
@@ -143,7 +152,6 @@ func TestFlipFlopWithoutAnyOtherParameter(t *testing.T) {
 	}
 }
 
-
 func TestFlipFlopWithWidthAndHeigh(t *testing.T) {
 	thumborOptions := ThumborOptions{Flop: true, Flip: true, Height: 500, Width: 400}
 	url, err := getURLParts(imageURL, thumborOptions)
@@ -155,7 +163,6 @@ func TestFlipFlopWithWidthAndHeigh(t *testing.T) {
 		t.Errorf("url is not flipfloped", url)
 	}
 }
-
 
 func TestFiltersAndSmartCombinatiotn(t *testing.T) {
 	firstFilter := "max-age(360000)"
