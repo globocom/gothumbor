@@ -177,7 +177,7 @@ func TestFiltersAndSmartCombinatiotn(t *testing.T) {
 
 	filtersPosition := strings.Index(url, "filters:"+firstFilter+":"+secondFilter)
 	smartPosition := strings.Index(url, "smart")
-	if filtersPosition > smartPosition {
+	if filtersPosition < smartPosition {
 		t.Errorf("Filters parameter should be before smart option")
 	}
 }
@@ -195,7 +195,7 @@ func TestFiltersAndFitInCombinatiotn(t *testing.T) {
 
 	filtersPosition := strings.Index(url, "filters:"+firstFilter+":"+secondFilter)
 	fitInPosition := strings.Index(url, "fit-in")
-	if filtersPosition > fitInPosition {
-		t.Errorf("Filters parameter should be before fit-in option")
+	if filtersPosition < fitInPosition {
+		t.Errorf("Filters parameter should be after fit-in option")
 	}
 }

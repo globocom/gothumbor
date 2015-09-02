@@ -88,4 +88,3 @@ func TestGetUrlScenario6(t *testing.T) {
 		t.Error("Got an unxpected thumbor path:", newURL)
 	}
 }
-
