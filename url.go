@@ -34,10 +34,7 @@ func GetCryptedThumborPath(key, imageURL string, options ThumborOptions) (url st
 }
 
 func GetThumborPath(imageURL string, options ThumborOptions) (path string, err error) {
-	if path, err = getURLParts(imageURL, options); err != nil {
-		return
-	}
-	return
+	return getURLParts(imageURL, options)
 }
 
 func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, err error) {
