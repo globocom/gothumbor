@@ -1,6 +1,7 @@
 package gothumbor
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 )
@@ -70,6 +71,7 @@ func TestEscapeURLByRFC3986(t *testing.T) {
 		t.Error("Got an unxpected partial path:", url)
 	}
 }
+
 func TestFitInParameter(t *testing.T) {
 	thumborOptions := ThumborOptions{FitIn: true}
 
@@ -197,5 +199,48 @@ func TestFiltersAndFitInCombinatiotn(t *testing.T) {
 	fitInPosition := strings.Index(url, "fit-in")
 	if filtersPosition < fitInPosition {
 		t.Errorf("Filters parameter should be after fit-in option")
+	}
+}
+
+func TestSetUpVerticalAlignment(t *testing.T) {
+	thumborOptions := ThumborOptions{VAlign: "top", Width: 200, Height: 300}
+
+	url, err := getURLParts(imageURL, thumborOptions)
+	if err != nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+	if !strings.Contains(url, "top") {
+		t.Errorf("Vertical alignment is not applied on the url")
+	}
+}
+
+func TestSetUpVerticalAlignmentBeforeWidthAndWidth(t *testing.T) {
+
+	thumborOptions := ThumborOptions{VAlign: "bottom", Width: 200, Height: 300}
+
+	url, err := getURLParts(imageURL, thumborOptions)
+	if err != nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+	WidthHeightPosition := strings.Index(url, "200x300")
+	VAlignPosition := strings.Index(url, "bottom")
+	shiftedPosition := WidthHeightPosition + len("200x300") + 1
+	if VAlignPosition != (shiftedPosition) {
+		fmt.Println("url : ", url)
+		fmt.Println("widthxheight position: ", shiftedPosition)
+		fmt.Println("valign position: ", VAlignPosition)
+		t.Errorf("Valign parameter should be 2 characters before width and height option")
+	}
+}
+
+func TestSetUpVerticalAlignmentIgnoreSmartOption(t *testing.T) {
+	thumborOptions := ThumborOptions{Smart: true, VAlign: "bottom", Width: 200, Height: 300}
+
+	url, err := getURLParts(imageURL, thumborOptions)
+	if err != nil || url == "" {
+		t.Errorf("Got an error when tried to generate the thumbor url")
+	}
+	if strings.Contains(url, "smart") {
+		t.Errorf("Should not contain smart when vertical alignment is used")
 	}
 }
