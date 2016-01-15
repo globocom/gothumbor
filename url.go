@@ -66,7 +66,8 @@ func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, er
 
 	if options.VAlign != "" {
 		parts = append(parts, options.VAlign)
-	} else if options.Smart {
+	}
+	if options.Smart {
 		parts = append(parts, "smart")
 	}
 

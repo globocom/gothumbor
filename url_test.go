@@ -50,6 +50,19 @@ func TestGetUrlPartialWithSmart(t *testing.T) {
 	}
 }
 
+func TestGetUrlPartialWithSmartTopFallback(t *testing.T) {
+	thumborOptions := ThumborOptions{Width: 1, Height: 1, VAlign: "top", Smart: true}
+	url, err := getURLParts(imageURL, thumborOptions)
+	if err != nil {
+		t.Error("Got an error when tried to generate the thumbor url", err)
+	}
+
+	urlE := strings.Join([]string{"1x1", "top", "smart", imageURL}, "/")
+	if url != urlE {
+		t.Errorf("Got an unxpected partial url: %s != %s", url, urlE)
+	}
+}
+
 func TestGetUrlPartialOnlyWithWidthAndHeight(t *testing.T) {
 	thumborOptions := ThumborOptions{Width: width, Height: height}
 	url, err := getURLParts(imageURL, thumborOptions)
@@ -230,17 +243,5 @@ func TestSetUpVerticalAlignmentBeforeWidthAndWidth(t *testing.T) {
 		fmt.Println("widthxheight position: ", shiftedPosition)
 		fmt.Println("valign position: ", VAlignPosition)
 		t.Errorf("Valign parameter should be 2 characters before width and height option")
-	}
-}
-
-func TestSetUpVerticalAlignmentIgnoreSmartOption(t *testing.T) {
-	thumborOptions := ThumborOptions{Smart: true, VAlign: "bottom", Width: 200, Height: 300}
-
-	url, err := getURLParts(imageURL, thumborOptions)
-	if err != nil || url == "" {
-		t.Errorf("Got an error when tried to generate the thumbor url")
-	}
-	if strings.Contains(url, "smart") {
-		t.Errorf("Should not contain smart when vertical alignment is used")
 	}
 }
