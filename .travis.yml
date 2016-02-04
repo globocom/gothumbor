@@ -4,10 +4,11 @@ go:
     - 1.5
     - tip
 
-before_install:
-    - go get golang.org/x/tools/cmd/cover
-    - go get github.com/mattn/goveralls
-
 script:
     - go test -v -covermode=count -coverprofile=coverage.out
+
+after_success:
+    - go get github.com/axw/gocov/gocov
+    - go get github.com/mattn/goveralls
+    - if ! go get github.com/golang/tools/cmd/cover; then go get golang.org/x/tools/cmd/cover; fi
     - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci
