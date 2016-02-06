@@ -1,8 +1,9 @@
 package gothumbor_test
 
 import (
-	"github.com/globocom/gothumbor"
 	"testing"
+
+	"github.com/globocom/gothumbor"
 )
 
 const myKey = "my-security-key"

@@ -6,12 +6,14 @@ import (
 	"testing"
 )
 
-const baseImageURL = "my.server.com/some/path/to/image.jpg"
-const imageURL = "http://" + baseImageURL
-const width = 300
-const height = 200
-const encryptedURL = "8ammJH8D-7tXy6kU3lTvoXlhu4o=/300x200/my.server.com/some/path/to/image.jpg"
-const unsafeURL = "/300x200/my.server.com/some/path/to/image.jpg"
+const (
+    baseImageURL = "my.server.com/some/path/to/image.jpg"
+    imageURL = "http://" + baseImageURL
+    width = 300
+    height = 200
+    encryptedURL = "8ammJH8D-7tXy6kU3lTvoXlhu4o=/300x200/my.server.com/some/path/to/image.jpg"
+    unsafeURL = "/300x200/my.server.com/some/path/to/image.jpg"
+)
 
 func TestGetUrlPartialWithWidthAndHeight(t *testing.T) {
 	thumborOptions := ThumborOptions{Width: 1, Height: 1, Smart: false}
@@ -139,7 +141,7 @@ func TestFlipWithoutAnyOtherParameter(t *testing.T) {
 	}
 
 	if url != strings.Join([]string{"-0x0", imageURL}, "/") {
-		t.Errorf("url is not fliped", url)
+		t.Errorf("url %q is not fliped", url)
 	}
 }
 
@@ -151,7 +153,7 @@ func TestFlopWithoutAnyOtherParameter(t *testing.T) {
 	}
 
 	if url != strings.Join([]string{"0x-0", imageURL}, "/") {
-		t.Errorf("url is not floped", url)
+		t.Errorf("url %q is not floped", url)
 	}
 }
 
@@ -163,7 +165,7 @@ func TestFlipFlopWithoutAnyOtherParameter(t *testing.T) {
 	}
 
 	if url != strings.Join([]string{"-0x-0", imageURL}, "/") {
-		t.Errorf("url is not flipfloped", url)
+		t.Errorf("url %q is not flipfloped", url)
 	}
 }
 
@@ -175,7 +177,7 @@ func TestFlipFlopWithWidthAndHeigh(t *testing.T) {
 	}
 
 	if url != strings.Join([]string{"-400x-500", imageURL}, "/") {
-		t.Errorf("url is not flipfloped", url)
+		t.Errorf("url %q is not flipfloped", url)
 	}
 }
 
