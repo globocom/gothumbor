@@ -139,7 +139,7 @@ func TestFlipWithoutAnyOtherParameter(t *testing.T) {
 	}
 
 	if url != strings.Join([]string{"-0x0", imageURL}, "/") {
-		t.Errorf("url is not fliped", url)
+		t.Errorf("url %q is not fliped", url)
 	}
 }
 
@@ -151,7 +151,7 @@ func TestFlopWithoutAnyOtherParameter(t *testing.T) {
 	}
 
 	if url != strings.Join([]string{"0x-0", imageURL}, "/") {
-		t.Errorf("url is not floped", url)
+		t.Errorf("url %q is not floped", url)
 	}
 }
 
@@ -163,7 +163,7 @@ func TestFlipFlopWithoutAnyOtherParameter(t *testing.T) {
 	}
 
 	if url != strings.Join([]string{"-0x-0", imageURL}, "/") {
-		t.Errorf("url is not flipfloped", url)
+		t.Errorf("url %q is not flipfloped", url)
 	}
 }
 
@@ -175,7 +175,7 @@ func TestFlipFlopWithWidthAndHeigh(t *testing.T) {
 	}
 
 	if url != strings.Join([]string{"-400x-500", imageURL}, "/") {
-		t.Errorf("url is not flipfloped", url)
+		t.Errorf("url %q is not flipfloped", url)
 	}
 }
 
