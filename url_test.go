@@ -6,12 +6,14 @@ import (
 	"testing"
 )
 
-const baseImageURL = "my.server.com/some/path/to/image.jpg"
-const imageURL = "http://" + baseImageURL
-const width = 300
-const height = 200
-const encryptedURL = "8ammJH8D-7tXy6kU3lTvoXlhu4o=/300x200/my.server.com/some/path/to/image.jpg"
-const unsafeURL = "/300x200/my.server.com/some/path/to/image.jpg"
+const (
+    baseImageURL = "my.server.com/some/path/to/image.jpg"
+    imageURL = "http://" + baseImageURL
+    width = 300
+    height = 200
+    encryptedURL = "8ammJH8D-7tXy6kU3lTvoXlhu4o=/300x200/my.server.com/some/path/to/image.jpg"
+    unsafeURL = "/300x200/my.server.com/some/path/to/image.jpg"
+)
 
 func TestGetUrlPartialWithWidthAndHeight(t *testing.T) {
 	thumborOptions := ThumborOptions{Width: 1, Height: 1, Smart: false}
