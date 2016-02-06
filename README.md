@@ -15,7 +15,7 @@ thumborOptions := gothumbor.ThumborOptions{Width: 540, Height: 480}
 newURL, err := gothumbor.GetCryptedThumborPath(myKey, myImageURL, thumborOptions)
 ```
 
-Whith these variables the values of:
+With these variables the values of:
 
 * newURL: AGp4diIF89Cm2ugmDGjhycikYjY=/540x480/my-domain.com/static/images/fancy-image.png
 * err: nil
