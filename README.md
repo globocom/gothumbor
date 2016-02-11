@@ -32,8 +32,7 @@ Contributors
 
 Click [here][contributors] to see the list of contributors.
 
-
-[Thumbor]:        https://github.com/thumbor/thumbor
-[mit]:            https://github.com/globocom/gothumbor/blob/master/LICENSE
-[globocom]:       https://github.com/globocom
-[contributors]:   https://github.com/globocom/gothumbor/graphs/contributors
+[Thumbor]:      https://github.com/thumbor/thumbor
+[mit]:          https://github.com/globocom/gothumbor/blob/master/LICENSE
+[globocom]:     https://github.com/globocom
+[contributors]: https://github.com/globocom/gothumbor/graphs/contributors
