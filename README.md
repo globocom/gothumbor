@@ -9,7 +9,7 @@ gothumbor allows easy usage of [Thumbor] in Go.
 Using it
 -------
 ```go
-mykey := "my-very-secret-key"
+myKey := "my-very-secret-key"
 myImageURL := "my-domain.com/static/images/fancy-image.png"
 thumborOptions := gothumbor.ThumborOptions{Width: 540, Height: 480}
 newURL, err := gothumbor.GetCryptedThumborPath(myKey, myImageURL, thumborOptions)
