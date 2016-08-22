@@ -15,6 +15,22 @@ const (
 	unsafeURL    = "/300x200/my.server.com/some/path/to/image.jpg"
 )
 
+
+func TestGetUrlPartialWithCrop(t *testing.T) {
+
+	thumborOptions := ThumborOptions{Left: 1, Top: 2, Right: 3, Bottom: 4}
+
+	url, err := getURLParts(imageURL, thumborOptions)
+	if err != nil {
+		t.Error("Got an error when tried to generate the thumbor url", err)
+	}
+
+	urlE := strings.Join([]string{"1x2:3x4", imageURL}, "/")
+	if url != urlE {
+		t.Errorf("Got an unxpected partial url: %s != %s", url, urlE)
+	}
+}
+
 func TestGetUrlPartialWithWidthAndHeight(t *testing.T) {
 	thumborOptions := ThumborOptions{Width: 1, Height: 1, Smart: false}
 	url, err := getURLParts(imageURL, thumborOptions)

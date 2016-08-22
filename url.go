@@ -19,6 +19,10 @@ type ThumborOptions struct {
 	Flip    bool
 	Flop    bool
 	Meta    bool
+	Left    int
+	Top     int
+	Right   int
+	Bottom  int
 }
 
 func GetCryptedThumborPath(key, imageURL string, options ThumborOptions) (url string, err error) {
@@ -49,6 +53,10 @@ func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, er
 	newImageURL := partialObject.String()
 	if options.Meta {
 		parts = append(parts, "meta")
+	}
+
+	if options.Left != 0 || options.Top != 0 || options.Right != 0 || options.Bottom != 0 {
+		parts = append(parts, fmt.Sprintf("%dx%d:%dx%d", options.Left, options.Top, options.Right, options.Bottom))
 	}
 
 	if options.Height != 0 || options.Width != 0 || options.Flip || options.Flop {
