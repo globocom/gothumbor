@@ -6,11 +6,14 @@ go:
     - 1.6
     - 1.7
     - tip
+install:
+    - source .travis.sh
 before_script:
     - go get github.com/axw/gocov/gocov
     - go get github.com/mattn/goveralls
     - if ! go get github.com/golang/tools/cmd/cover; then go get golang.org/x/tools/cmd/cover; fi
 script:
     - go test -v -covermode=count -coverprofile=coverage.out
+    - gofmt_check
 after_success:
     - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci
