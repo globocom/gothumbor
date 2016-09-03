@@ -15,7 +15,6 @@ const (
 	unsafeURL    = "/300x200/my.server.com/some/path/to/image.jpg"
 )
 
-
 func TestGetUrlPartialWithCrop(t *testing.T) {
 
 	thumborOptions := ThumborOptions{Left: 1, Top: 2, Right: 3, Bottom: 4}
