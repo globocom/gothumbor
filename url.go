@@ -10,6 +10,7 @@ import (
 )
 
 type ThumborOptions struct {
+	Trim 	bool
 	Width   int
 	Height  int
 	VAlign  string
@@ -53,6 +54,10 @@ func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, er
 	newImageURL := partialObject.String()
 	if options.Meta {
 		parts = append(parts, "meta")
+	}
+	
+	if options.Trim {
+		parts = append(parts, "trim")
 	}
 
 	if options.Left != 0 || options.Top != 0 || options.Right != 0 || options.Bottom != 0 {
