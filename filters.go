@@ -14,3 +14,7 @@ func DistributedCollageFilter(orientation, alignment string, urls []string) stri
 		strings.Join(urls, url.QueryEscape("|")),
 	)
 }
+
+func WatermarkFilter(imageURL string, x, y, alpha int) string {
+	return fmt.Sprintf("watermark(%s,%d,%d,%d)", imageURL, x, y, alpha)
+}
