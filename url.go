@@ -10,7 +10,7 @@ import (
 )
 
 type ThumborOptions struct {
-	Trim 	bool
+	Trim    bool
 	Width   int
 	Height  int
 	VAlign  string
@@ -55,9 +55,13 @@ func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, er
 	if options.Meta {
 		parts = append(parts, "meta")
 	}
-	
+
 	if options.Trim {
 		parts = append(parts, "trim")
+	}
+
+	if options.FitIn {
+		parts = append(parts, "fit-in")
 	}
 
 	if options.Left != 0 || options.Top != 0 || options.Right != 0 || options.Bottom != 0 {
@@ -87,10 +91,6 @@ func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, er
 	filters := []string{}
 	for _, value := range options.Filters {
 		filters = append(filters, value)
-	}
-
-	if options.FitIn {
-		parts = append(parts, "fit-in")
 	}
 
 	if len(options.Filters) > 0 {
