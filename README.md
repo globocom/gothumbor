@@ -1,7 +1,7 @@
 gothumbor
 =========
 
-[![GoDoc](https://godoc.org/github.com/globocom/gothumbor?status.svg)](https://godoc.org/github.com/globocom/gothumbor) [![Build Status](https://travis-ci.org/globocom/gothumbor.svg?branch=master)]
+[![GoDoc](https://godoc.org/github.com/globocom/gothumbor?status.svg)](https://godoc.org/github.com/globocom/gothumbor) 
 [![Go Report Card](https://goreportcard.com/badge/github.com/globocom/gothumbor)](https://goreportcard.com/report/github.com/globocom/gothumbor)
 
 [![Tests](https://github.com/globocom/gothumbor/actions/workflows/coverage.yml/badge.svg)](https://github.com/globocom/gothumbor/actions/workflows/coverage.yml)
