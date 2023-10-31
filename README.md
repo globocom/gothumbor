@@ -1,4 +1,5 @@
 gothumbor
+![Coverage](https://img.shields.io/badge/Coverage-93.3%25-brightgreen)
 =========
 
 [![GoDoc](https://godoc.org/github.com/globocom/gothumbor?status.svg)](https://godoc.org/github.com/globocom/gothumbor) [![Build Status](https://travis-ci.org/globocom/gothumbor.svg?branch=master)](https://travis-ci.org/globocom/gothumbor) [![Coverage Status](https://coveralls.io/repos/globocom/gothumbor/badge.svg?branch=master&service=github)](https://coveralls.io/github/globocom/gothumbor?branch=master)
