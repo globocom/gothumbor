@@ -1,8 +1,11 @@
 gothumbor
-![Coverage](https://img.shields.io/badge/Coverage-93.3%25-brightgreen)
 =========
 
-[![GoDoc](https://godoc.org/github.com/globocom/gothumbor?status.svg)](https://godoc.org/github.com/globocom/gothumbor) [![Build Status](https://travis-ci.org/globocom/gothumbor.svg?branch=master)](https://travis-ci.org/globocom/gothumbor) [![Coverage Status](https://coveralls.io/repos/globocom/gothumbor/badge.svg?branch=master&service=github)](https://coveralls.io/github/globocom/gothumbor?branch=master)
+[![GoDoc](https://godoc.org/github.com/globocom/gothumbor?status.svg)](https://godoc.org/github.com/globocom/gothumbor) [![Build Status](https://travis-ci.org/globocom/gothumbor.svg?branch=master)]
+[![Go Report Card](https://goreportcard.com/badge/github.com/globocom/gothumbor)](https://goreportcard.com/report/github.com/globocom/gothumbor)
+
+[![Tests](https://github.com/globocom/gothumbor/actions/workflows/coverage.yml/badge.svg)](https://github.com/globocom/gothumbor/actions/workflows/coverage.yml)
+![Coverage](https://img.shields.io/badge/Coverage-93.3%25-brightgreen)
 
 gothumbor allows easy usage of [Thumbor] in Go.
 
