@@ -3,7 +3,6 @@ gothumbor
 
 [![GoDoc](https://godoc.org/github.com/globocom/gothumbor?status.svg)](https://godoc.org/github.com/globocom/gothumbor) 
 [![Go Report Card](https://goreportcard.com/badge/github.com/globocom/gothumbor)](https://goreportcard.com/report/github.com/globocom/gothumbor)
-
 [![Tests](https://github.com/globocom/gothumbor/actions/workflows/coverage.yml/badge.svg)](https://github.com/globocom/gothumbor/actions/workflows/coverage.yml)
 ![Coverage](https://img.shields.io/badge/Coverage-93.3%25-brightgreen)
 
